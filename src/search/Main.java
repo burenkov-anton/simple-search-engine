@@ -69,17 +69,10 @@ public class Main {
             System.out.println(people[i]);
         }
     }
-    
-    public static void findPerson(String[] records, HashMap<String, ArrayList<Integer>> invertedIndex) {
-        Scanner scanner = new Scanner(System.in);
+
+    public static String getSearchResult(String[] records, HashMap<String, ArrayList<Integer>> invertedIndex, String query, String strategy) {
         StringBuilder result = new StringBuilder();
-        System.out.println("Select a matching strategy: ALL, ANY, NONE");
-        String strategy = scanner.nextLine();
-
-        String query = scanner.nextLine();
         String[] queryParts = query.split(" ");
-
-
 
         HashSet<Integer> totalFound = new HashSet<>();
         for (String currentQuery : queryParts) {
@@ -114,14 +107,38 @@ public class Main {
                 result.append(records[elem] + "\n");
             }
         }
+        return result.toString();
+    }
 
-        String res = result.toString();
+    public static boolean checkStrategyInput(String strategy) {
+        HashSet<String> availableStrategies = new HashSet<>();
+        availableStrategies.add("ALL");
+        availableStrategies.add("ANY");
+        availableStrategies.add("NONE");
+        if (availableStrategies.contains(strategy.toUpperCase())) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static void findPerson(String[] records, HashMap<String, ArrayList<Integer>> invertedIndex) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Select a matching strategy: ALL, ANY, NONE");
+        String strategy = scanner.nextLine();
+        if (!checkStrategyInput(strategy)) {
+            System.out.println("Unknown strategy");
+            return;
+        }
+
+        String query = scanner.nextLine();
+
+        String result = getSearchResult(records, invertedIndex, query, strategy);
         
-        if (res.length() == 0) {
+        if (result.length() == 0) {
             System.out.println("No matching people found.");
         } else {
             System.out.println("Found people:");
-            System.out.println(res);
+            System.out.println(result);
         }
         
     }
