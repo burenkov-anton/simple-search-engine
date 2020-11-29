@@ -20,7 +20,7 @@ public class Main {
     public static HashMap<String, ArrayList<Integer>> createInvertedIndex(String[] records) {
         HashMap<String, ArrayList<Integer>> invertedIndex = new HashMap<>();
         for (int i = 0; i < records.length; i++) {
-            String[] parts = records[i].split(" ");
+            String[] parts = records[i].split("\\s+");
             for (String part : parts) {
                 if (invertedIndex.containsKey(part.toUpperCase())) {
                     ArrayList<Integer> value = invertedIndex.get(part.toUpperCase());
@@ -72,7 +72,7 @@ public class Main {
 
     public static String getSearchResult(String[] records, HashMap<String, ArrayList<Integer>> invertedIndex, String query, String strategy) {
         StringBuilder result = new StringBuilder();
-        String[] queryParts = query.split(" ");
+        String[] queryParts = query.split("\\s+");
 
         HashSet<Integer> totalFound = new HashSet<>();
         for (String currentQuery : queryParts) {
