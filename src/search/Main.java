@@ -64,9 +64,9 @@ public class Main {
         return in;
     }
     
-    public static void printPeople(String[] people) {
-        for (int i = 0; i < people.length; i++) {
-            System.out.println(people[i]);
+    public static void printRecords(String[] records) {
+        for (int i = 0; i < records.length; i++) {
+            System.out.println(records[i]);
         }
     }
 
@@ -121,7 +121,7 @@ public class Main {
         return false;
     }
     
-    public static void findPerson(String[] records, HashMap<String, ArrayList<Integer>> invertedIndex) {
+    public static void findRecords(String[] records, HashMap<String, ArrayList<Integer>> invertedIndex) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Select a matching strategy: ALL, ANY, NONE");
         String strategy = scanner.nextLine();
@@ -135,9 +135,9 @@ public class Main {
         String result = getSearchResult(records, invertedIndex, query, strategy);
         
         if (result.length() == 0) {
-            System.out.println("No matching people found.");
+            System.out.println("No matching records found.");
         } else {
-            System.out.println("Found people:");
+            System.out.println("Found records:");
             System.out.println(result);
         }
         
@@ -145,8 +145,8 @@ public class Main {
     
     public static void showMenu() {
         System.out.println("=== Menu ===");
-        System.out.println("1. Find a person");
-        System.out.println("2. Print all people");
+        System.out.println("1. Find a record");
+        System.out.println("2. Print all records");
         System.out.println("0. Exit");
     }
     
@@ -158,10 +158,10 @@ public class Main {
             int action = scanner.nextInt();
             switch(action) {
                 case 1:
-                    findPerson(records, index);
+                    findRecords(records, index);
                     break;
                 case 2:
-                    printPeople(records);
+                    printRecords(records);
                     break;
                 case 0:
                     isRunning = false;
